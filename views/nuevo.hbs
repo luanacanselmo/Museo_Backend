@@ -8,17 +8,22 @@
 <body>
     <h1>Nuevo Objeto</h1>
     <form action="{{url}}/agregar" method="POST">
-        <p><label>Nombre:&nbsp;</label><input type="text"   name="nombre"></p>
-        <p><label>Edad:&nbsp;  </label><input type="number" name="edad">  </p>
-        <p><label>email:&nbsp; </label><input type="email"  name="email"> </p>
+        <p><label>idPieza:&nbsp;</label><input type="text"   name="idPieza"></p>
 
-           
-        <p><input type="checkbox" name="afiliado" value="si"><label>&nbsp;Afiliado</label></p>
+        <p><label>Numero registro:&nbsp;</label><input type="number"   name="nroRegistro"></p>
+        <p><label>Nombre Pieza:&nbsp;  </label><input type="text" name="nombrePieza">  </p>
+        <p><label>medida Pieza:&nbsp; </label><input type="text"  name="medidaPieza"> </p>
+        <p><label>material objeto:&nbsp; </label><input type="text"  name="materialObjeto"> </p>
+       
+        <p><label>fecha adquisición:&nbsp;  </label><input type="date" name="fechaAdquisicion">  </p>
+        <p><label>forma Adquirida:&nbsp; </label><input type="text"  name="formaAdquirida"> </p>
+        <p><label>año pieza:&nbsp; </label><input type="number"  name="añoPieza"> </p>
+       
+        <p><label>estado pieza:&nbsp;  </label><input type="text" name="estadoPieza">  </p>
+        <p><label>cantidad:&nbsp; </label><input type="number"  name="cantidad"> </p>
+        <p><label>observación :&nbsp; </label><input type="text"  name="observacion"> </p>                  
         
 
-        <p></p><input type="radio" name="nacionalidad" value="argentino" checked><label>Argentino</label></p>
-        <p></p><input type="radio" name="nacionalidad" value="limítrofe">        <label>Países Limítrofes</label></p>
-        <p></p><input type="radio" name="nacionalidad" value="resto">            <label>Resto del Mundo</label></p>
         <br>
         <input type="submit" value="Enviar">
     </form>

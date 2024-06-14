@@ -50,3 +50,4 @@ class Perfil {
 }
 
 module.exports = {Mercaderia, Usuario, Perfil}
+

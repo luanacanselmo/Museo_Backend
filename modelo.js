@@ -37,6 +37,7 @@ function guardar(data){
     
     mercaderias.push(data)
     fs.writeFileSync('./db.txt',JSON.stringify(mercaderias))
+
 }
 
 function obtener(){
