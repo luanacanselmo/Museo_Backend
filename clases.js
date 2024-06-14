@@ -1,8 +1,15 @@
-class Mercaderia{
-    constructor(nom, cant, imp){
-        this.nombre = nom;
-        this.cantidad = cant;
-        this.impuestos = imp;
+class pieza{
+    constructor(nroR, nomP, medidaP, materialOb, fechaAd, formaAdq, añoPi, estadoPi, cantidad, Obse){
+        this.NumeroRegistro = nroR;
+        this.NombrePieza = nomP;
+        this.MedidaPieza = medidaP;
+        this.MaterialObjeto = materialOb;
+        this.FechaAdquisicion = fechaAd; 
+        this.FormaAdquirida = formaAdq;
+        this.AñoPieza = añoPi;
+        this.EstadoPieza = estadoPi;
+        this.Cantidad = cantidad;
+        this.Observacion = Obse; 
     }
 }
 
