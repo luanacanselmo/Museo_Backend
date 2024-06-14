@@ -6,8 +6,8 @@ const Modelo = require('./modelo.js')
 function nuevo(data){
     console.log("--nuevo(data)-->[controlador]")
     console.log(data);
-    let miMercaderia = new Clases.Mercaderia(data.nombre, parseInt(data.cantidad), data.impuestos)
-    Modelo.guardar(miMercaderia);
+    let miPieza = new Clases.Pieza(data.NumeroRegistro, data.NombrePieza, data.MedidaPieza, data.MaterialObjeto, data.FechaAdquisicion, data.FormaAdquirida, data.AñoPieza, data.EstadoPieza, data.Cantidad, data.Observacion)
+    Modelo.guardar(miPieza);
 }
 
 function obtener(){

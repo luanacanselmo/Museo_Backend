@@ -6,7 +6,7 @@ const Seguridad = require("./seguridad.js");
 
 const app = express();
 
-const Controlador = require('./controlador');
+const Controlador = require('./controlador.js');
 
 app.use(express.json());
 app.use(express.urlencoded({extended : false}))

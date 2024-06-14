@@ -29,26 +29,25 @@ function getUsuarios(){
 
 function guardar(data){
 
-    let str_mercaderias = fs.readFileSync('./db.txt','utf-8')
-    let mercaderias = []
-    if(str_mercaderias){
-        mercaderias = JSON.parse(str_mercaderias)
+    let str_pieza = fs.readFileSync('./db.txt','utf-8')
+    let piezas = []
+    if(str_pieza){
+        piezas = JSON.parse(str_pieza)
     }
     
-    mercaderias.push(data)
-    fs.writeFileSync('./db.txt',JSON.stringify(mercaderias))
-
+    pieza.push(data)
+    fs.writeFileSync('./db.txt',JSON.stringify(pieza))
 }
 
 function obtener(){
 
-    let str_mercaderias = fs.readFileSync('./db.txt','utf-8')
-    let mercaderias = []
-    if(str_mercaderias){
-        mercaderias = JSON.parse(str_mercaderias)
+    let str_piezas = fs.readFileSync('./db.txt','utf-8')
+    let piezas = []
+    if(str_piezas){
+        piezas = JSON.parse(str_piezas)
     }
 
-    return mercaderias;
+    return piezas;
 
 }
 

@@ -1,4 +1,4 @@
-class pieza{
+class Pieza{
     constructor(nroR, nomP, medidaP, materialOb, fechaAd, formaAdq, añoPi, estadoPi, cantidad, Obse){
         this.NumeroRegistro = nroR;
         this.NombrePieza = nomP;
@@ -10,9 +10,28 @@ class pieza{
         this.EstadoPieza = estadoPi;
         this.Cantidad = cantidad;
         this.Observacion = Obse; 
+        this.class="Pieza";
     }
-}
+    static fromJSON(json){
+        if(json.class == "Pieza"){
+            let nuevaPieza = new Pieza();
+            nuevaPieza.nombre = json.NumeroRegistro;
+            nuevaPieza.usuario = json.NombrePieza;
+            nuevaPieza.pass = json.MedidaPieza;
+            nuevaPieza.token = json.MaterialObjeto;
+            nuevaPieza.perfil = json.FechaAdquisicion;
+            nuevaPieza.class = json.FormaAdquirida;
+            nuevaPieza.class = json.AñoPieza;
+            nuevaPieza.class = json.EstadoPieza;
+            nuevaPieza.class = json.Cantidad;
+            nuevaPieza.class = json.Observacion;
+            nuevaPieza.class = json.class;
 
+            return nuevaPieza;
+        }
+    
+}
+}
 class Usuario{
     constructor(nombre, usuario, pass, token, perfil){
         this.nombre = nombre;
@@ -56,5 +75,5 @@ class Perfil {
     }
 }
 
-module.exports = {Mercaderia, Usuario, Perfil}
+module.exports = {Pieza, Usuario, Perfil}
 
