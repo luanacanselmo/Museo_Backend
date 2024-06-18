@@ -1,54 +1,70 @@
-const fs = require('fs')
-const Clases = require('./clases.js')
+const fs = require('fs');
+const Clases = require('./clases.js');
 
-function guardarUsuario(data){
-
-    let str_usuarios = fs.readFileSync('./db/usuarios.txt','utf-8')
-    let usuarios = []
-    if(str_usuarios){
-        usuarios = JSON.parse(str_usuarios)
+function guardarUsuario(data) {
+    let str_usuarios = fs.readFileSync('./db/usuarios.txt', 'utf-8');
+    let usuarios = [];
+    if (str_usuarios) {
+        usuarios = JSON.parse(str_usuarios);
     }
-    
-    usuarios.push(data)
-    fs.writeFileSync('./db/usuarios.txt',JSON.stringify(usuarios))
+
+    usuarios.push(data);
+    fs.writeFileSync('./db/usuarios.txt', JSON.stringify(usuarios));
 }
 
-function getUsuarios(){    
- 
-    let str_usuarios = fs.readFileSync('./db/usuarios.txt','utf-8')
-    let usuarios = []
-    if(str_usuarios){ 
+function getUsuarios() {
+    let str_usuarios = fs.readFileSync('./db/usuarios.txt', 'utf-8');
+    let usuarios = [];
+    if (str_usuarios) {
         usuarios = JSON.parse(str_usuarios);
     }
     let objUsuarios = [];
-    usuarios.forEach(x=>objUsuarios.push(Clases.Usuario.fromJSON(x)))
+    usuarios.forEach(x => objUsuarios.push(Clases.Usuario.fromJSON(x)));
 
     return objUsuarios;
-
 }
 
-function guardar(data){
 
-    let str_pieza = fs.readFileSync('./db.txt','utf-8')
-    let piezas = []
-    if(str_pieza){
-        piezas = JSON.parse(str_pieza)
+// function guardar(data) {
+//     let str_piezas = fs.readFileSync('./db.txt', 'utf-8');
+//     let piezas = [];
+//     if (str_piezas) {
+//         piezas = JSON.parse(str_piezas);
+//     }
+
+//     piezas.push(data);
+//     fs.writeFileSync('./db.txt', JSON.stringify(piezas));
+// }
+
+function guardar(data) {
+    let str_piezas = fs.readFileSync('./db.txt', 'utf-8');
+    let piezas = [];
+    if (str_piezas) {
+        piezas = JSON.parse(str_piezas);
+        console.log('Piezas existentes:', piezas);
     }
-    
-    pieza.push(data)
-    fs.writeFileSync('./db.txt',JSON.stringify(pieza))
+
+    console.log('Nueva pieza:', data);
+    piezas.push(data);
+    console.log('Piezas después de agregar la nueva:', piezas);
+
+    try {
+        fs.writeFileSync('./db.txt', JSON.stringify(piezas));
+        console.log('Datos guardados en db.txt');
+        return true;
+    } catch (err) {
+        console.error('Error al guardar los datos:', err);
+        return false;
+    }
 }
-
-function obtener(){
-
-    let str_piezas = fs.readFileSync('./db.txt','utf-8')
-    let piezas = []
-    if(str_piezas){
-        piezas = JSON.parse(str_piezas)
+function obtener() {
+    let str_piezas = fs.readFileSync('./db.txt', 'utf-8');
+    let piezas = [];
+    if (str_piezas) {
+        piezas = JSON.parse(str_piezas);
     }
 
     return piezas;
-
 }
 
-module.exports = {guardar, obtener, guardarUsuario, getUsuarios}
+module.exports = { guardar, obtener, guardarUsuario, getUsuarios };

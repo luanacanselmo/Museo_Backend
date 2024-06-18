@@ -7,23 +7,17 @@
 </head>
 <body>
     <h1>Nuevo Objeto</h1>
-    <form action="{{_url}}/agregar" method="POST">
-        <p><label>idPieza:&nbsp;</label><input type="text"   name="idPieza"></p>
-
-        <p><label>Numero registro:&nbsp;</label><input type="number"   name="nroRegistro"></p>
-        <p><label>Nombre Pieza:&nbsp;  </label><input type="text" name="nombrePieza">  </p>
-        <p><label>medida Pieza:&nbsp; </label><input type="text"  name="medidaPieza"> </p>
-        <p><label>material objeto:&nbsp; </label><input type="text"  name="materialObjeto"> </p>
-       
-        <p><label>fecha adquisición:&nbsp;  </label><input type="date" name="fechaAdquisicion">  </p>
-        <p><label>forma Adquirida:&nbsp; </label><input type="text"  name="formaAdquirida"> </p>
-        <p><label>año pieza:&nbsp; </label><input type="number"  name="añoPieza"> </p>
-       
-        <p><label>estado pieza:&nbsp;  </label><input type="text" name="estadoPieza">  </p>
-        <p><label>cantidad:&nbsp; </label><input type="number"  name="cantidad"> </p>
-        <p><label>observación :&nbsp; </label><input type="text"  name="observacion"> </p>                  
-        
-
+    <form action="{{url}}/agregar" method="POST">
+        <p><label>Numero registro:&nbsp;</label><input type="number" name="NumeroRegistro"></p>
+        <p><label>Nombre Pieza:&nbsp;</label><input type="text" name="NombrePieza"></p>
+        <p><label>Medida Pieza:&nbsp;</label><input type="text" name="MedidaPieza"></p>
+        <p><label>Material Objeto:&nbsp;</label><input type="text" name="MaterialObjeto"></p>
+        <p><label>Fecha Adquisición:&nbsp;</label><input type="date" name="FechaAdquisicion"></p>
+        <p><label>Forma Adquirida:&nbsp;</label><input type="text" name="FormaAdquirida"></p>
+        <p><label>Año Pieza:&nbsp;</label><input type="number" name="AñoPieza"></p>
+        <p><label>Estado Pieza:&nbsp;</label><input type="text" name="EstadoPieza"></p>
+        <p><label>Cantidad:&nbsp;</label><input type="number" name="Cantidad"></p>
+        <p><label>Observación:&nbsp;</label><input type="text" name="Observacion"></p>
         <br>
         <input type="submit" value="Enviar">
     </form>
