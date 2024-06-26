@@ -1,22 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: "Nunito", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: <weight>;
+            font-style: normal;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Mi Empresa</h1>
-    <nav>
-        <a href="{{url}}/nuevo">Nuevo</a>
-        <a href="listar">Listar</a>
-        <a href="modificar">Modificar</a>
-        <a href="eliminar">Eliminar</a>
-    </nav>
-    <hr>
-    <img src="{{url}}/empresa.png" alt="Imágen de Empresa">
-    <hr>
-   
+    <div class="w-full">
+        {{!-- NavBar --}}
+        <header class="flex items-center justify-between bg-white text-gray-500 px-6 py-4">
+            <div class="flex items-center gap-4">
+                <img src="img/LogoFondoTransparente.png" alt="Company Logo" width="50" height="50" />
+                <span class="font-semibold">Museo Lavalle</span>
+            </div>
+            <div>
+                <ul class="flex items-center justify-center gap-7 text-lg font-semibold">
+                    <li class="hover:text-gray-800 hover:border-b hover:border-[#F5B410] ease-out duration-300">
+                        <a class="nav-link" href="/public/">Inicio</a>
+                    </li>
+                    <li class="hover:text-gray-800 hover:border-b hover:border-[#F5B410] ease-out duration-300">
+                        <a class="nav-link" href="/public/vendimia">Ver piezas</a>
+                    </li>
+                    <li class="hover:text-gray-800 hover:border-b hover:border-[#F5B410] ease-out duration-300">
+                        <a class="nav-link" href="/public/noticias/novedades">Noticias</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div id="toggle" class="flex items-center gap-2 p-2 pr-5 rounded-full cursor-pointer">
+                <span class="relative flex h-7 w-7 shrink-0 overflow-hidden rounded-full ">
+                    <img src="https://ui-avatars.com/api/?name=Julian+Álvarez" alt=""
+                        class="flex h-full w-full items-center justify-center rounded-full bg-muted">
+                </span>
+                <span class="font-medium">Julian Álvarez</span>
+                <span><svg id="dropdown" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M6 9l6 6l6 -6" />
+                    </svg></span>
+            </div>
+
+            {{!-- Menu Usuario NavBar --}}
+            <div id="menu" class="absolute hidden top-16 right-10 z-10 w-44 h-auto">
+                <div
+                    class="absolute w-44 bg-white rounded-md border border-gray-400/50 shadow-md p-6 text-base font-semibold">
+                    <ul class="space-y-3">
+                        <li><a class="hover:text-gray-800" href="{{url}}/perfil">Editar perfil</a></li>
+                        <li><a class="hover:text-gray-800" href="{{url}}/salir">Cerrar Sesión</a></li>
+                        <li><button class="hover:text-gray-800">Cambiar tema</button></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+    </div>
+
+    {{!-- Dashboard Tabla de Piezas --}}
+    <div class="bg-gray-200 h-screen">
+        <div class="container mx-auto py-8">
+            <div class="flex justify-between items-center mb-4">
+                <h1 class="text-2xl font-bold text-[#58595E]">Gestión de Piezas de Museo</h1>
+                {{!-- Función agregar pieza --}}
+
+                {{!-- Botón Mostrar Formulario --}}
+
+                {{!-- Formulario --}}
+                {{!-- <div
+                    class="absolute w-full h-full overflow-hidden top-0 left-0 bg-gray-800/20 flex justify-center items-center z-20">
+                    <div class="bg-white rounded-md border border-gray-400/50 shadow-md p-6 text-base font-semibold">
+                        <h1>Nuevo Objeto</h1>
+
+                        <form action="{{url}}/agregar" method="POST">
+                            <p><label>Nombre:&nbsp;</label><input type="text" name="nombre"></p>
+                            <p><label>Edad:&nbsp; </label><input type="number" name="edad"> </p>
+                            <p><label>email:&nbsp; </label><input type="email" name="email"> </p>
+
+
+                            <p><input type="checkbox" name="afiliado" value="si"><label>&nbsp;Afiliado</label></p>
+
+
+                            <p></p><input type="radio" name="nacionalidad" value="argentino"
+                                checked><label>Argentino</label>
+                            </p>
+                            <p></p><input type="radio" name="nacionalidad" value="limítrofe"> <label>Países
+                                Limítrofes</label>
+                            </p>
+                            <p></p><input type="radio" name="nacionalidad" value="resto"> <label>Resto del Mundo</label>
+                            </p>
+                            <br>
+                            <input type="submit" value="Enviar">
+                        </form>
+                    </div>
+                </div> --}}
+
+
+            </div>
+            <div class="mb-4 flex justify-between">
+                <input
+                    class="flex h-10 rounded-md w-72 border bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Buscar..." type="text" value="" />
+
+                <a href="{{url}}/nuevo"
+                    class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium text-white bg-[#223362] h-10 px-4 py-2">
+                    Agregar Pieza
+                </a>
+            </div>
+            <div class="relative w-full overflow-auto">
+                <table class="border-collapse table-auto w-full">
+                    <thead class="bg-gray-300">
+                        <tr>
+                            <th class="w-10 h-12 px-4 text-center align-middle font-medium text-muted-foreground">
+                                <input
+                                    class="peer relative appearance-none w-5 h-5 checked:bg-blue-500 bg-red-900 border-gray-300"
+                                    type="checkbox" />
+                            </th>
+                            <th
+                                class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                                Nombre
+                            </th>
+                            <th
+                                class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                                Material
+                            </th>
+                            <th
+                                class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                                Fecha de Adquisición
+                            </th>
+                            <th
+                                class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                                Año de Adquisición
+                            </th>
+                            <th
+                                class="h-12 p-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                                Estado
+                            </th>
+                            <th
+                                class="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="p-4 align-middle text-center"><input type="checkbox" name="no se" id="no se">
+                            </td>
+                            <td class="p-4 align-middle">Escultura de bronce</td>
+                            <td class="p-4 align-middle">Bronce</td>
+                            <td class="p-4 align-middle">2018-11-20</td>
+                            <td class="p-4 align-middle">2018</td>
+                            <td class="px-8 align-middle">
+                                <div class="bg-yellow-300 px-[3px] rounded-full flex justify-center">
+                                    <p class="text-yellow-800">
+                                        <span>⬤</span> Restauración
+                                    </p>
+                                </div>
+                            </td>
+                            <td class="p-4 align-middle">
+                                <div class="flex gap-2">
+                                    <button
+                                        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-[#F5B410] hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                                        Editar
+                                    </button>
+                                    <button
+                                        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-[#F39200] hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 align-middle text-center"><input type="checkbox" name="no se" id="no se">
+                            </td>
+                            <td class="p-4 align-middle">Escultura de bronce</td>
+                            <td class="p-4 align-middle">Bronce</td>
+                            <td class="p-4 align-middle">2018-11-20</td>
+                            <td class="p-4 align-middle">2018</td>
+                            <td class="px-10 align-middle">
+                                <div class="bg-yellow-300 px-[3px] rounded-full">
+                                    <p class="text-yellow-800">
+                                        <span>⬤</span> Restauración
+                                    </p>
+                                </div>
+                            </td>
+                            <td class="p-4 align-middle">
+                                <div class="flex gap-2">
+                                    <button
+                                        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-[#F5B410] hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                                        Editar
+                                    </button>
+                                    <button
+                                        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-[#F39200] hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 align-middle text-center"><input type="checkbox" name="no se" id="no se">
+                            </td>
+                            <td class="p-4 align-middle">Escultura de bronce</td>
+                            <td class="p-4 align-middle">Bronce</td>
+                            <td class="p-4 align-middle">2018-11-20</td>
+                            <td class="p-4 align-middle">2018</td>
+                            <td class="px-8 align-middle">
+                                <div class="bg-yellow-300 px-[3px] rounded-full flex justify-center">
+                                    <p class="text-yellow-800">
+                                        <span>⬤</span> Restauración
+                                    </p>
+                                </div>
+                            </td>
+                            <td class="p-4 align-middle">
+                                <div class="flex gap-2">
+                                    <button
+                                        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-[#F5B410] hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                                        Editar
+                                    </button>
+                                    <button
+                                        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-[#F39200] hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
 
 </body>
+
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggle = document.getElementById('toggle');
+        const menu = document.getElementById('menu');
+        const dropdown = document.getElementById('dropdown');
+        const body = document.body;
+
+        toggle.addEventListener('click', function () {
+            menu.classList.toggle('hidden');
+        });
+
+        body.addEventListener('click', function (event) {
+            if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+    });
+
+</script>

@@ -1,20 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Museo App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Asegúrate de tener la fuente de FontAwesome -->
 </head>
+
 <body>
-    <h1>Mi Empresa</h1>
-    <form action="{{url}}/login" method="POST">
-        <p><label>Usuario:</label><input type='text' name="user"></p>
-        <p><label>Contraseña:</label><input type="password" name='pass'></p>
- 
-        <input type="submit" value="Enviar">
+    <div class="container">
+        <div class="left-section"></div>
+        <div class="right-section">
+            <div class="login-container">
+                <form class="login-form" action="{{url}}/login" method="POST">
 
-    </form>
-
-
+                    <h2 class="login-title"><i class="fas fa-user-circle"></i>Iniciar Sesión</h2>
+                    <div class="form-control">
+                        <i class="fas fa-user icon"></i>
+                        <input type="text" placeholder="Usuario" name="user" required>
+                    </div>
+                    <div class="form-control">
+                        <i class="fas fa-lock icon"></i>
+                        <input type="password" placeholder="Contraseña" name="pass" required>
+                    </div>
+                    <button type="submit" class="login-button">Login</button>
+                </form>
+                    <button type="button" class="register-button"
+                        onclick="window.location.href='{{url}}/verificacion'">Registrarme</button>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
