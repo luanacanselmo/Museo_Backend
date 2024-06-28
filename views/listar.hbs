@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Piezas</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <style>
+        /* Estilos adicionales específicos para la página */
+    </style>
+</head>
+<body>
+    <h1>Listado de Piezas</h1>
+    
+    <table class="piezas-table">
+        <thead>
+            <tr>
+                <th>Número de Registro</th>
+                <th>Nombre de Pieza</th>
+                <th>Medida de Pieza</th>
+                <th>Material del Objeto</th>
+                <th>Fecha de Adquisición</th>
+                <th>Forma adquirida</th>
+                 <th>Forma adquirida</th>
+                <th>Año pieza</th>
+                <th> Estado Pieza</th>
+                <th>cantidad</th>
+                <th>Observacion</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            {{#each piezas}}
+            <tr>
+                <td>{{this.NumeroRegistro}}</td>
+                <td>{{this.NombrePieza}}</td>
+                <td>{{this.MedidaPieza}}</td>
+                <td>{{this.MaterialObjeto}}</td>
+                <td>{{this.FechaAdquisicion}}</td>
+                <td>{{this.FormaAdquirida}}</td>
+                <td>{{this.AñoPieza}}</td>
+                <td>{{this.EstadoPieza}}</td>
+                <td>{{this.Cantidad}}</td>
+                <td>{{this.Observacion}}</td>
+
+
+                <td>
+                    {{this.NumeroRegistro}}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</body>
+</html>
