@@ -47,4 +47,10 @@ function obtener() {
     return Modelo.obtener();
 }
 
-module.exports = { nuevo, obtener };
+function listar(){
+   
+  return Modelo.obtener();
+
+}
+
+module.exports = { nuevo, obtener, listar};

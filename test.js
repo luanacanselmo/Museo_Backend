@@ -2,6 +2,8 @@ const Clases = require('./clases.js');
 const Helper = require('./helper.js');
 const Modelo = require('./modelo.js');
 
+console.log(Modelo.obtener());
+
 function testPerfil() {
     console.log("Perfil ------------------");
     const perfil = new Clases.Perfil();

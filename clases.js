@@ -1,6 +1,5 @@
 class Pieza {
-    constructor(idPie, nroR, nomP, medidaP, materialOb, fechaAd, formaAdq, añoPi, estadoPi, cantidad, Obse) {
-        this.idPieza = idPie;
+    constructor(nroR, nomP, medidaP, materialOb, fechaAd, formaAdq, añoPi, estadoPi, cantidad, Obse) {
         this.NumeroRegistro = nroR;
         this.NombrePieza = nomP;
         this.MedidaPieza = medidaP;
@@ -17,7 +16,6 @@ class Pieza {
     static fromJSON(json) {
         if (json.class == "Pieza") {
             let nuevaPieza = new Pieza();
-            nuevaPieza.idPieza = json.idPieza;
             nuevaPieza.NumeroRegistro = json.NumeroRegistro;
             nuevaPieza.NombrePieza = json.NombrePieza;
             nuevaPieza.MedidaPieza = json.MedidaPieza;

@@ -86,6 +86,30 @@ app.post('/agregar', (req, res) => {
     }
 });
 
+
+// app.get('/listar', (req, res) => {
+//     const piezas = Controlador.listar();
+//     var archivo = fs.readFileSync('./views/listar.hbs', 'utf-8');
+//     var template = Handlebars.compile(archivo);
+//     var salida = template(objeto);
+//     res.send(salida);
+//     res.render('listar', { nombre: "Enzo" });
+//     //res.send("<pre>"+JSON.stringify(piezas)+"</pre>")
+// });
+
+
+app.get('/listar', (req, res) => {
+    const piezas = Controlador.listar();
+    try {
+        var archivo = fs.readFileSync('./views/listar.hbs', 'utf-8');
+        var template = Handlebars.compile(archivo);
+        var salida = template({ url: `http://localhost:${port}`, piezas: piezas });
+        res.send(salida);
+    } catch (err) {
+        console.error('Error al leer el archivo listar.hbs:', err);
+        res.status(500).send('Error interno del servidor');
+    }
+});
 app.listen(port, () => {
     console.log(`Escuchando en el puerto ${port}`);
 });
