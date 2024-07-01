@@ -52,4 +52,4 @@ function listar(){
 
 }
 
-module.exports = { nuevo, obtener, listar};
+module.exports = { nuevo, obtener, listar, nuevoUser};

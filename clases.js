@@ -223,4 +223,4 @@ class Perfil {
     }
 }*/
 
-module.exports = { Pieza, Prestamo, Taxidermia , EstadiPieza, Piezaestado, Prestamoestado};
+module.exports = { Pieza, Prestamo, Taxidermia , EstadiPieza, Piezaestado, Prestamoestado, Usuario};
