@@ -59,17 +59,28 @@ app.get('/nuevo', (req, res) => {
     res.send(salida);
 });
 
-// app.post('/agregar', (req, res) => {
-//     console.log("llegó post/agregar");
-//     console.log(req.body);
-    
-//     Controlador.nuevo(req.body);
-    
-//     var archivo = fs.readFileSync('./views/menu.hbs', 'utf-8');
-//     var template = Handlebars.compile(archivo);
-//     var salida = template(objeto);
-//     res.send(salida);
-// });
+app.get('/registrar', (req, res) => {
+  console.log("llegó un post/nuevo");
+  var archivo = fs.readFileSync('./views/registro.hbs', 'utf-8');
+  var template = Handlebars.compile(archivo);
+  var salida = template(objeto);
+  res.send(salida);
+});
+
+app.post('/agregarUser', (req, res) => {
+  console.log("llegó post/agregar");
+  console.log(req.body);
+  const operacionExitosa = Controlador.nuevoUser(req.body);
+  console.log('Operación exitosa:', operacionExitosa);
+  if (operacionExitosa) {
+      console.log('Redirigiendo a la ruta principal...');
+      res.redirect('/');
+  } else {
+      console.log('Error al guardar los datos');
+      res.send('Error al guardar los datos');
+  }
+});
+
 app.post('/agregar', (req, res) => {
     console.log("llegó post/agregar");
     console.log(req.body);

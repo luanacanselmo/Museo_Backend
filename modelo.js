@@ -2,14 +2,23 @@ const fs = require('fs');
 const Clases = require('./clases.js');
 
 function guardarUsuario(data) {
-    let str_usuarios = fs.readFileSync('./db/usuarios.txt', 'utf-8');
-    let usuarios = [];
-    if (str_usuarios) {
-        usuarios = JSON.parse(str_usuarios);
-    }
-
-    usuarios.push(data);
+  let str_usuarios = fs.readFileSync('./db/usuarios.txt', 'utf-8');
+  let usuarios = [];
+  if (str_usuarios) {
+    usuarios = JSON.parse(str_usuarios);
+    console.log('Piezas existentes:', usuarios);
+  }
+  console.log('Nuevo Usuario:', data);
+  usuarios.push(data);
+  console.log('Usuario después de agregar:', usuarios);
+  try {
     fs.writeFileSync('./db/usuarios.txt', JSON.stringify(usuarios));
+    console.log('Datos guardados en ./db/usuarios.txt');
+    return true;
+  } catch (err) {
+    console.error('Error al guardar los datos:', err);
+    return false;
+  }
 }
 
 function getUsuarios() {

@@ -7,7 +7,7 @@ function registrado(body){
     console.log("seguridad <-r- modelo '[{Usuario}]'")
     if(body.pass != ''){
         
-        let cant = usuarios.filter(x=> body.user == x.usuario && x.pass == x.pass)
+      let cant = usuarios.filter(x=> body.user == x.usuario && body.pass == x.pass)
         if(cant.length == 1){
             return true;
         }else{
