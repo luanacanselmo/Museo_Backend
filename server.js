@@ -25,38 +25,47 @@ let destino = { url: "" };
 
 //------------- zona de ruteo ------------------
 app.get('/', (req, res) => {
-    var archivo = fs.readFileSync('./views/index.hbs', 'utf-8');
-    var template = Handlebars.compile(archivo);
-    var salida = template(objeto);
-    res.send(salida);
+  var archivo = fs.readFileSync('./views/index.hbs', 'utf-8');
+  var template = Handlebars.compile(archivo);
+  var salida = template(objeto);
+  res.send(salida);
 });
 
 app.post('/login', (req, res) => {
-    console.log("browser --> server 'post/login'");
-    console.log("server --> seguridad 'registrado(req.body)'");
+  console.log("browser --> server 'post/login'");
+  console.log("server --> seguridad 'registrado(req.body)'");
 
-    let registrado = Seguridad.registrado(req.body);
+  let registrado = Seguridad.registrado(req.body);
 
-    if (registrado == true) {
-        console.log("server <-r- seguridad 'true'");
-        var archivo = fs.readFileSync('./views/menu.hbs', 'utf-8');
-        var template = Handlebars.compile(archivo);
-        var salida = template(objeto);
-        console.log("browser <-r- server 'menu.html'");
-        res.send(salida);
-    } else {
-        console.log("server <-r- seguridad 'false'");
-        console.log("browser <-r- server 'Error...!!!.html'");
-        res.send("<p>Error...!!!</p>");
-    }
+  if (registrado == true) {
+    console.log("server <-r- seguridad 'true'");
+    const piezas = Controlador.listar();
+    var archivo = fs.readFileSync('./views/menu.hbs', 'utf-8');
+    var template = Handlebars.compile(archivo);
+    var salida = template({ objeto, piezas: piezas });
+    res.send(salida);
+    console.log("browser <-r- server 'menu.hbs'");
+  } else {
+    console.log("server <-r- seguridad 'false'");
+    console.log("browser <-r- server 'Error...!!!.html'");
+    res.send("<p>Error...!!!</p>");
+  }
+});
+
+app.get('/menu', (req, res) => {
+  const piezas = Controlador.listar();
+  var archivo = fs.readFileSync('./views/menu.hbs', 'utf-8');
+  var template = Handlebars.compile(archivo);
+  var salida = template({ objeto, piezas: piezas });
+  res.send(salida);
 });
 
 app.get('/nuevo', (req, res) => {
-    console.log("llegó un post/nuevo");
-    var archivo = fs.readFileSync('./views/nuevo.hbs', 'utf-8');
-    var template = Handlebars.compile(archivo);
-    var salida = template(objeto);
-    res.send(salida);
+  console.log("llegó un post/nuevo");
+  var archivo = fs.readFileSync('./views/nuevo.hbs', 'utf-8');
+  var template = Handlebars.compile(archivo);
+  var salida = template(objeto);
+  res.send(salida);
 });
 
 app.get('/registrar', (req, res) => {
@@ -73,54 +82,43 @@ app.post('/agregarUser', (req, res) => {
   const operacionExitosa = Controlador.nuevoUser(req.body);
   console.log('Operación exitosa:', operacionExitosa);
   if (operacionExitosa) {
-      console.log('Redirigiendo a la ruta principal...');
-      res.redirect('/');
+    console.log('Redirigiendo a la ruta principal...');
+    res.redirect('/');
   } else {
-      console.log('Error al guardar los datos');
-      res.send('Error al guardar los datos');
+    console.log('Error al guardar los datos');
+    res.send('Error al guardar los datos');
   }
 });
 
 app.post('/agregar', (req, res) => {
-    console.log("llegó post/agregar");
-    console.log(req.body);
+  console.log("llegó post/agregar");
+  console.log(req.body);
 
-    const operacionExitosa = Controlador.nuevo(req.body);
-    console.log('Operación exitosa:', operacionExitosa);
+  const operacionExitosa = Controlador.nuevo(req.body);
+  console.log('Operación exitosa:', operacionExitosa);
 
-    if (operacionExitosa) {
-        console.log('Redirigiendo a la ruta principal...');
-        res.redirect('/');
-    } else {
-        console.log('Error al guardar los datos');
-        res.send('Error al guardar los datos');
-    }
+  if (operacionExitosa) {
+    console.log('Redirigiendo a la ruta principal...');
+    res.redirect('/menu');
+  } else {
+    console.log('Error al guardar los datos');
+    res.send('Error al guardar los datos');
+  }
 });
-
-
-// app.get('/listar', (req, res) => {
-//     const piezas = Controlador.listar();
-//     var archivo = fs.readFileSync('./views/listar.hbs', 'utf-8');
-//     var template = Handlebars.compile(archivo);
-//     var salida = template(objeto);
-//     res.send(salida);
-//     res.render('listar', { nombre: "Enzo" });
-//     //res.send("<pre>"+JSON.stringify(piezas)+"</pre>")
-// });
-
 
 app.get('/listar', (req, res) => {
-    const piezas = Controlador.listar();
-    try {
-        var archivo = fs.readFileSync('./views/listar.hbs', 'utf-8');
-        var template = Handlebars.compile(archivo);
-        var salida = template({ url: `http://localhost:${port}`, piezas: piezas });
-        res.send(salida);
-    } catch (err) {
-        console.error('Error al leer el archivo listar.hbs:', err);
-        res.status(500).send('Error interno del servidor');
-    }
+  const piezas = Controlador.listar();
+  try {
+    var archivo = fs.readFileSync('./views/listar.hbs', 'utf-8');
+    var template = Handlebars.compile(archivo);
+    var salida = template({ url: `http://localhost:${port}`, piezas: piezas });
+    res.send(salida);
+  } catch (err) {
+    console.error('Error al leer el archivo listar.hbs:', err);
+    res.status(500).send('Error interno del servidor');
+  }
 });
+
 app.listen(port, () => {
-    console.log(`Escuchando en el puerto ${port}`);
+  console.log(`Escuchando en el puerto ${port}`);
 });
