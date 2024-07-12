@@ -60,6 +60,13 @@ app.get('/menu', (req, res) => {
   res.send(salida);
 });
 
+app.get('/inicio', (req, res) => {
+  var archivo = fs.readFileSync('./views/inicio.hbs', 'utf-8');
+  var template = Handlebars.compile(archivo);
+  var salida = template(objeto);
+  res.send(salida);
+});
+
 app.get('/nuevo', (req, res) => {
   console.log("llegó un post/nuevo");
   var archivo = fs.readFileSync('./views/nuevo.hbs', 'utf-8');
