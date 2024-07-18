@@ -20,6 +20,7 @@ function nuevoUser(data) {
 function nuevo(data) {
   console.log("--nuevo(data)-->[controlador]");
   console.log(data);
+  let BajaLogica = data.BajaLogica === 'true'
 
   let miPieza = new Clases.Pieza(
       data.NumeroRegistro,
@@ -31,7 +32,9 @@ function nuevo(data) {
       data.AñoPieza,
       data.EstadoPieza,
       data.Cantidad,
-      data.Observacion
+      data.Observacion,
+      BajaLogica
+
   );
 
   console.log('Pieza creada:', miPieza);
@@ -51,5 +54,3 @@ function listar(){
   return Modelo.obtener();
 
 }
-
-module.exports = { nuevo, obtener, listar, nuevoUser};
