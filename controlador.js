@@ -54,3 +54,5 @@ function listar(){
   return Modelo.obtener();
 
 }
+
+module.exports = {nuevoUser, nuevo, obtener, listar};
