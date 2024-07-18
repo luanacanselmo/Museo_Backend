@@ -20,6 +20,7 @@ function nuevoUser(data) {
 function nuevo(data) {
   console.log("--nuevo(data)-->[controlador]");
   console.log(data);
+  let BajaLogica = data.BajaLogica === 'true'
 
   let miPieza = new Clases.Pieza(
       data.NumeroRegistro,
@@ -31,7 +32,9 @@ function nuevo(data) {
       data.AñoPieza,
       data.EstadoPieza,
       data.Cantidad,
-      data.Observacion
+      data.Observacion,
+      BajaLogica
+
   );
 
   console.log('Pieza creada:', miPieza);
@@ -52,4 +55,25 @@ function listar(){
 
 }
 
-module.exports = { nuevo, obtener, listar, nuevoUser};
+
+//baja logica
+async function eliminarPieza(req, res) {
+  const { numeroRegistro } = req.params;
+  try {
+    const resultado = await Modelo.actualizarBajaLogica(numeroRegistro);
+    if (resultado) {
+      res.json({ success: true, message: 'Pieza eliminada lógicamente' });
+    } else {
+      res.status(404).json({ success: false, message: 'Pieza no encontrada' });
+    }
+  } catch (error) {
+    console.error('Error al eliminar la pieza:', error);
+    res.status(500).json({ success: false, message: 'Error al eliminar la pieza' });
+  }
+}
+
+
+
+
+module.exports = {nuevoUser, nuevo, obtener, listar, eliminarPieza};
+

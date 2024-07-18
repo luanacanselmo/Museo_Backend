@@ -1,5 +1,5 @@
 class Pieza {
-    constructor(nroR, nomP, medidaP, materialOb, fechaAd, formaAdq, añoPi, estadoPi, cantidad, Obse) {
+    constructor(nroR, nomP, medidaP, materialOb, fechaAd, formaAdq, añoPi, estadoPi, cantidad, Obse, supr = true) {
         this.NumeroRegistro = nroR;
         this.NombrePieza = nomP;
         this.MedidaPieza = medidaP;
@@ -10,6 +10,7 @@ class Pieza {
         this.EstadoPieza = estadoPi;
         this.Cantidad = cantidad;
         this.Observacion = Obse;
+        this.BajaLogica = supr;
         this.class = "Pieza";
     }
 
@@ -26,6 +27,7 @@ class Pieza {
             nuevaPieza.EstadoPieza = json.EstadoPieza;
             nuevaPieza.Cantidad = json.Cantidad;
             nuevaPieza.Observacion = json.Observacion;
+            nuevaPieza.BajaLogica = json.BajaLogica;
             nuevaPieza.class = json.class;
             return nuevaPieza;
         }

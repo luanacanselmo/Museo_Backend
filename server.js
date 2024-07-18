@@ -126,6 +126,18 @@ app.get('/listar', (req, res) => {
   }
 });
 
+
+
+
+
+
+
+//baja logica
+app.delete('/eliminar/:numeroRegistro', Controlador.eliminarPieza);
+
+
+
 app.listen(port, () => {
   console.log(`Escuchando en el puerto ${port}`);
 });
+
