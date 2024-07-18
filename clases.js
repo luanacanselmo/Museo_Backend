@@ -13,7 +13,7 @@ class Pieza {
         this.class = "Pieza";
     }
 
-    static fromJSON(json) {
+    static fromJSON(json) { //Convierte el json en clase
         if (json.class == "Pieza") {
             let nuevaPieza = new Pieza();
             nuevaPieza.NumeroRegistro = json.NumeroRegistro;
