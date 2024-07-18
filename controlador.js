@@ -55,4 +55,25 @@ function listar(){
 
 }
 
-module.exports = {nuevoUser, nuevo, obtener, listar};
+
+//baja logica
+async function eliminarPieza(req, res) {
+  const { numeroRegistro } = req.params;
+  try {
+    const resultado = await Modelo.actualizarBajaLogica(numeroRegistro);
+    if (resultado) {
+      res.json({ success: true, message: 'Pieza eliminada lógicamente' });
+    } else {
+      res.status(404).json({ success: false, message: 'Pieza no encontrada' });
+    }
+  } catch (error) {
+    console.error('Error al eliminar la pieza:', error);
+    res.status(500).json({ success: false, message: 'Error al eliminar la pieza' });
+  }
+}
+
+
+
+
+module.exports = {nuevoUser, nuevo, obtener, listar, eliminarPieza};
+
