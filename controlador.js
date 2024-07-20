@@ -76,4 +76,3 @@ async function eliminarPieza(req, res) {
 
 
 module.exports = {nuevoUser, nuevo, obtener, listar, eliminarPieza};
-

@@ -10,7 +10,7 @@ class Pieza {
         this.EstadoPieza = estadoPi;
         this.Cantidad = cantidad;
         this.Observacion = Obse;
-        this.BajaLogica = supr;
+        this.dadaDeBaja = dadaDeBaja;
         this.class = "Pieza";
     }
 
@@ -29,6 +29,8 @@ class Pieza {
             nuevaPieza.Observacion = json.Observacion;
             nuevaPieza.BajaLogica = json.BajaLogica;
             nuevaPieza.class = json.class;
+            nuevaPieza.class = json.dadaDeBaja;
+
             return nuevaPieza;
         }
     }
