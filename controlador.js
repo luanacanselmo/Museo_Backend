@@ -100,5 +100,33 @@ async function eliminarPieza(req, res) {
 
 
 
+function guardarPrestamo(data) {
+  console.log("--nuevo(Préstamo)-->[controlador]");
+  console.log(data);
+  let insert = data.insert === 'true'
 
-module.exports = {nuevoUser, nuevo, obtener, listar, eliminarPieza, PiezaPorNro};
+  let miPretamos = new Clases.Prestamo(
+      data.idPrestamo,
+      data.eventoPrestamo,
+      data.observacionPrestamo,
+      data.MaterialObjeto,
+      data.fechaPrestamo,
+      data.fechaDevolucion,
+      insert
+
+  );
+
+  console.log(' miPretamos:', miPretamos);
+
+  const guardarExitoso = Modelo.guardar(miPretamos);
+  console.log('Operación de guardar:', guardarExitoso);
+
+  return guardarExitoso;
+}
+
+function obtenerPrestamo() {
+  return Modelo.obtenerPrestamo();
+}
+
+
+module.exports = {nuevoUser, nuevo, obtener, listar, eliminarPieza, PiezaPorNro, guardarPrestamo, obtenerPrestamo};

@@ -110,4 +110,38 @@ function obtener() {
 //   }
 // }
 
-module.exports = { guardar, obtener, guardarUsuario, getUsuarios };
+
+function guardarPrestamo(data) {
+  let str_prestamo = fs.readFileSync('./db/prestamo.txt', 'utf-8');
+  let prestamo = [];
+  if (str_prestamo) {
+    prestamo = JSON.parse(str_prestamo);
+      console.log('Piezas existentes:', prestamo);
+  }
+
+  console.log('Nueva prestamo:', data);
+  prestamo.push(data);
+  console.log('prestamo después de agregar la nueva:', prestamo);
+
+  try {
+      fs.writeFileSync('./db/prestamo.txt', JSON.stringify(piezas));
+      console.log('Datos guardados en prestamo.txt');
+      return true;
+  } catch (err) {
+      console.error('Error al guardar los datos:', err);
+      return false;
+  }
+}
+
+function obtenerPrestamo() {
+  let str_prestamo = fs.readFileSync('./db/prestamo.txt', 'utf-8');
+  let prestamo = [];
+  if (str_prestamo) {
+    prestamo = JSON.parse(str_prestamo);
+  }
+
+  return prestamo;
+}
+
+
+module.exports = { guardar, obtener, guardarUsuario, getUsuarios, guardarPrestamo, obtenerPrestamo };

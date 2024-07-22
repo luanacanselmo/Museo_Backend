@@ -157,5 +157,21 @@ app.listen(port, () => {
   console.log(`Corriendo en \x1b[35m'http://localhost:${port}'\x1b[30m crtl + click izq para ir\x1b[0m`)
 });
 
+
+
+app.post('/prestamo', (req, res) => {
+  console.log("llegó post");
+  console.log(req.body);
+
+  const operacionExitosa = Controlador.guardarPrestamo(req.body);
+  console.log('Operación exitosa:', operacionExitosa);
+
+});
+
+
+app.get('/prestamo',autenticarUsuario, (req, res) => {
+  console.log("llegó un /nuevo prestamo");
+  res.render('prestamo', { useTailwind: true, titulo: 'Nuevo prestamo' });
+});
 //baja logica
 /* app.delete('/eliminar/:numeroRegistro', Controlador.eliminarPieza); */
