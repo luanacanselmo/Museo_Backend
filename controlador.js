@@ -55,6 +55,22 @@ function listar(){
 
 }
 
+function PiezaPorNro(numRe){
+
+  const piezasArray = Modelo.obtener();
+  const piezaId = piezasArray.find(pieza => pieza.NumeroRegistro === numRe);//busca el priemer numero en el array que coincida con el que se le pasa con el 
+
+
+  if (piezaId) {
+    console.log('encontramos', piezaId.NumeroRegistro);
+    return(piezaId);
+  }else{
+    console.log('No encontre ni aka');
+  }
+
+
+}
+
 
 //baja logica
 async function eliminarPieza(req, res) {
@@ -75,4 +91,4 @@ async function eliminarPieza(req, res) {
 
 
 
-module.exports = {nuevoUser, nuevo, obtener, listar, eliminarPieza};
+module.exports = {nuevoUser, nuevo, obtener, listar, eliminarPieza, PiezaPorNro};

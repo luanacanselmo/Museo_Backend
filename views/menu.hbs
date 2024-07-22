@@ -226,8 +226,10 @@
                             </td>
                             <td class="px-2 py-4 space-x-2.5">
                                 <button class="eliminar-btn" data-numero="{{this.NumeroRegistro}}" data-nombre="{{this.NombrePieza}}">Eliminar</button>
-
-                                <a href="#" class="font-medium text-red-600 hover:underline">Editar</a>
+                                 <form action="{{url}}/enviarNreg" method="post">
+                                            <input type="hidden" name="editar" value="{{this.NumeroRegistro}}">
+                                            <button type="submit" class="btn btn-success" >Editar</button>
+                                        </form>                                   
                             </td>
                         </tr>
                         {{/each}}

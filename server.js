@@ -127,7 +127,26 @@ app.get('/listar', (req, res) => {
 });
 
 
+app.post('/enviarNreg', (req, res) =>{ 
 
+  const NroReg = req.body.editar;     // en esta ruta se obtiene el nro de registro de la pieza que se quiere modificar y se 
+                                      // redirige a otra ruta
+res.redirect(`/editarPieza/${NroReg}`);
+});
+
+app.get('/editarPieza/:NroReg', (req, res)=>{
+
+  const numRe = req.params.NroReg;
+  const piezas = Controlador.PiezaPorNro(numRe); 
+
+  var archivo = fs.readFileSync('./views/modificar.hbs', 'utf-8');
+  var template = Handlebars.compile(archivo);
+  var salida = template({objeto, piezas});
+
+  res.send(salida);
+
+
+}); 
 
 
 
