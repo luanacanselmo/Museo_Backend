@@ -1,100 +1,94 @@
+// Importación de módulos necesarios
 const express = require("express");
 const path = require('path');
-const Handlebars = require('handlebars');
-const fs = require('fs');
+const exphbs = require('express-handlebars');
 const Seguridad = require("./seguridad.js");
 const Controlador = require('./controlador.js');
+const session = require('express-session');
 
+// Inicialización de la aplicación Express
 const app = express();
 const port = 3000;
 
+// Configuración de express-session
+app.use(session({
+  secret: 'secreto_de_tito_session', // Contraseña super secreta de tito suarez
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Cambia a true si usas HTTPS
+}));
+
+
+// Configuración de express-handlebars como motor de plantillas
+app.engine('hbs', exphbs.engine({
+  extname: '.hbs', // Extensión de archivo para las plantillas
+  defaultLayout: 'main', // Plantilla de diseño por defecto
+  layoutsDir: path.join(__dirname, 'views/layouts') // Directorio de layouts
+}));
+app.set('view engine', 'hbs'); // Establecer Handlebars como motor de vistas
+app.set('views', path.join(__dirname, 'views')); // Directorio de vistas
+
+
+// Middleware para parsear JSON y datos de formularios
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/", express.static(path.join(__dirname, "/public")));
+// Servir archivos estáticos desde el directorio 'public'
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.set("public", path.join(__dirname, "public"));
+// Middleware para verificar la autenticación
+function autenticarUsuario(req, res, next) {
+  const token = req.session.token;
+  if (token) {
+    const usuario = Seguridad.verificarToken(token);
+    if (usuario) {
+      req.usuario = usuario;
+      console.log(usuario);
+      return next();
+    }
+  }
+  res.redirect('/');
+}
 
-app.use("/", express.static(path.join(__dirname, "/views")));
-
-app.set("views", path.join(__dirname, "views")); // Ruta a la carpeta "views"
-
-let _url = "http://localhost:" + port;
-var objeto = { url: _url };
-let destino = { url: "" };
-
-//------------- zona de ruteo ------------------
+// ----- Definición de rutas -----
 app.get('/', (req, res) => {
-  var archivo = fs.readFileSync('./views/index.hbs', 'utf-8');
-  var template = Handlebars.compile(archivo);
-  var salida = template(objeto);
-  res.send(salida);
+  res.render('index', { useTailwind: false, titulo: 'Login' });
 });
 
 app.post('/login', (req, res) => {
   console.log("browser --> server 'post/login'");
   console.log("server --> seguridad 'registrado(req.body)'");
-
-  let registrado = Seguridad.registrado(req.body);
-
-  if (registrado == true) {
+  let resultado = Seguridad.registrado(req.body);
+  if (resultado.autenticado) {
     console.log("server <-r- seguridad 'true'");
-    const piezas = Controlador.listar();
-    var archivo = fs.readFileSync('./views/menu.hbs', 'utf-8');
-    var template = Handlebars.compile(archivo);
-    var salida = template({ objeto, piezas: piezas });
-    res.send(salida);
-    console.log("browser <-r- server 'menu.hbs'");
+    req.session.token = resultado.token;
+    res.redirect('/inicio');
+    console.log("browser <-r- server 'inicio'");
   } else {
     console.log("server <-r- seguridad 'false'");
     console.log("browser <-r- server 'Error...!!!.html'");
-    res.send("<p>Error...!!!</p>");
+    res.render('index', { 
+      useTailwind: false, 
+      titulo: 'Login',
+      error: resultado.mensaje,
+    });
+    console.log(resultado.mensaje)
   }
 });
 
-app.get('/menu', (req, res) => {
+app.get('/menu',autenticarUsuario, (req, res) => {
   const piezas = Controlador.listar();
-  var archivo = fs.readFileSync('./views/menu.hbs', 'utf-8');
-  var template = Handlebars.compile(archivo);
-  var salida = template({ objeto, piezas: piezas });
-  res.send(salida);
+  res.render('menu', { useTailwind: true, piezas, titulo: 'Menú' ,usuario: req.usuario});
 });
 
-app.get('/inicio', (req, res) => {
-  var archivo = fs.readFileSync('./views/inicio.hbs', 'utf-8');
-  var template = Handlebars.compile(archivo);
-  var salida = template(objeto);
-  res.send(salida);
+app.get('/inicio',autenticarUsuario, (req, res) => {
+  console.log(req.usuario)
+  res.render('inicio', { useTailwind: false, titulo: 'Inicio', usuario: req.usuario});
 });
 
-app.get('/nuevo', (req, res) => {
-  console.log("llegó un post/nuevo");
-  var archivo = fs.readFileSync('./views/nuevo.hbs', 'utf-8');
-  var template = Handlebars.compile(archivo);
-  var salida = template(objeto);
-  res.send(salida);
-});
-
-app.get('/registrar', (req, res) => {
-  console.log("llegó un post/nuevo");
-  var archivo = fs.readFileSync('./views/registro.hbs', 'utf-8');
-  var template = Handlebars.compile(archivo);
-  var salida = template(objeto);
-  res.send(salida);
-});
-
-app.post('/agregarUser', (req, res) => {
-  console.log("llegó post/agregar");
-  console.log(req.body);
-  const operacionExitosa = Controlador.nuevoUser(req.body);
-  console.log('Operación exitosa:', operacionExitosa);
-  if (operacionExitosa) {
-    console.log('Redirigiendo a la ruta principal...');
-    res.redirect('/');
-  } else {
-    console.log('Error al guardar los datos');
-    res.send('Error al guardar los datos');
-  }
+app.get('/nuevo',autenticarUsuario, (req, res) => {
+  console.log("llegó un get/nuevo");
+  res.render('nuevo', { useTailwind: true, titulo: 'Nuevo Elemento' });
 });
 
 app.post('/agregar', (req, res) => {
@@ -113,19 +107,32 @@ app.post('/agregar', (req, res) => {
   }
 });
 
-app.get('/listar', (req, res) => {
-  const piezas = Controlador.listar();
-  try {
-    var archivo = fs.readFileSync('./views/listar.hbs', 'utf-8');
-    var template = Handlebars.compile(archivo);
-    var salida = template({ url: `http://localhost:${port}`, piezas: piezas });
-    res.send(salida);
-  } catch (err) {
-    console.error('Error al leer el archivo listar.hbs:', err);
-    res.status(500).send('Error interno del servidor');
+app.get('/registrar', (req, res) => {
+  console.log("llegó un get/registrar");
+  res.render('registro', { useTailwind: false, titulo: 'Registro' });
+});
+
+app.post('/agregarUser',(req, res) => {
+  const resultado = Controlador.nuevoUser(req.body);
+  if (resultado.exito) {
+    res.redirect('/login?mensaje=' + encodeURIComponent(resultado.mensaje));
+  } else {
+    res.render('registro', { 
+      useTailwind: true, 
+      titulo: 'Registro de Usuario',
+      error: resultado.mensaje
+    });
   }
 });
 
+app.get('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.redirect('/');
+    }
+    res.redirect('/');
+  });
+});
 
 app.post('/enviarNreg', (req, res) =>{ 
 
@@ -149,14 +156,13 @@ app.get('/editarPieza/:NroReg', (req, res)=>{
 }); 
 
 
-
-
-//baja logica
-app.delete('/eliminar/:numeroRegistro', Controlador.eliminarPieza);
-
-
-
-app.listen(port, () => {
-  console.log(`Escuchando en el puerto ${port}`);
+app.use((req, res, next) => {
+  res.status(404).render('404', { useTailwind: true, titulo: 'Página no encontrada' });
 });
 
+app.listen(port, () => {
+  console.log(`Corriendo en \x1b[35m'http://localhost:${port}'\x1b[30m crtl + click izq para ir\x1b[0m`)
+});
+
+//baja logica
+/* app.delete('/eliminar/:numeroRegistro', Controlador.eliminarPieza); */

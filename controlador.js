@@ -4,17 +4,27 @@ const Modelo = require("./modelo.js");
 function nuevoUser(data) {
   console.log("--nuevo(data)-->[controlador]");
   console.log(data);
+
+  const usuario = Modelo.getUsuarios();
+  if (usuario.find(u => u.usuario === data.usuario)){
+    return{ exito: false, mensaje:"El nombre de usuario ya existe"}
+  }
+
+
   let unUser = new Clases.Usuario(
     data.nombre,
     data.usuario,
     data.pass,
-    data.token,
-    data.perfil,
+    null,
   );
+
   console.log('Usuario creado:', unUser);
   const guardarExitoso = Modelo.guardarUsuario(unUser);
-  console.log('Operación de guardar:', guardarExitoso);
-  return guardarExitoso;
+  if (guardarExitoso){
+    return{ exito: false, mensaje:"Usuario registrado con éxito"}   
+  }else{
+    return{ exito: false, mensaje:"Error al guardad el usuario"}
+  }
 }
 
 function nuevo(data) {

@@ -10,11 +10,11 @@ class Pieza {
         this.EstadoPieza = estadoPi;
         this.Cantidad = cantidad;
         this.Observacion = Obse;
-        this.dadaDeBaja = dadaDeBaja;
+        this.BajaLogica = supr;
         this.class = "Pieza";
     }
 
-    static fromJSON(json) { //Convierte el json en clase
+    static fromJSON(json) {
         if (json.class == "Pieza") {
             let nuevaPieza = new Pieza();
             nuevaPieza.NumeroRegistro = json.NumeroRegistro;
@@ -29,8 +29,6 @@ class Pieza {
             nuevaPieza.Observacion = json.Observacion;
             nuevaPieza.BajaLogica = json.BajaLogica;
             nuevaPieza.class = json.class;
-            nuevaPieza.class = json.dadaDeBaja;
-
             return nuevaPieza;
         }
     }
@@ -191,12 +189,11 @@ class Piezaestado{
  
   
 class Usuario {
-    constructor(nombre, usuario, pass, token, perfil) {
+    constructor(nombre, usuario, pass, token) {
         this.nombre = nombre;
         this.usuario = usuario;
         this.pass = pass;
         this.token = token;
-        this.perfil = perfil;
         this.class = "Usuario";
     }
 
@@ -207,7 +204,6 @@ class Usuario {
                 json.usuario,
                 json.pass,
                 json.token,
-                json.perfil
             );
         }
     }
