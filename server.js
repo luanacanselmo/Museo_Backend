@@ -162,6 +162,15 @@ app.post('/registrarprestamo', (req, res) => {
   console.log('Operación exitosa:', operacionExitosa);
 });
 
+
+app.post('/deletePieza',(req, res) => {
+  console.log("llegó post");
+  console.log(req.body);
+  const NroReg = req.body.NroReg;
+  const operacionExitosa = Controlador.PiezaBaja(NroReg);
+  res.redirect('menu');
+});
+
 app.use((req, res, next) => {
   res.status(404).render('404', { useTailwind: true, titulo: 'Página no encontrada' });
 });

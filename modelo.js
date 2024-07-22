@@ -69,47 +69,24 @@ function obtener() {
 }
 
 // baja lógica
-// async function actualizarBajaLogica(numeroRegistro) {
-//   try {
-//     let piezas = await leerArchivo(np);
-//     const index = piezas.findIndex(p => p.NumeroRegistro == numeroRegistro);
-//     if (index !== -1) {
-//       piezas[index].BajaLogica = false;
-//       await escribirArchivo(DB_PATH, piezas);
-//       console.log(`Pieza con número de registro ${numeroRegistro} marcada como eliminada lógicamente.`);
-//       return true;
-//     } else {
-//       console.log(`No se encontró la pieza con número de registro ${numeroRegistro}.`);
-//       return false;
-//     }
-//   } catch (err) {
-//     console.error('Error al actualizar baja lógica:', err);
-//     return false;
-//   }
-// }
-
-// async function leerArchivo(ruta) {
-//   try {
-//     const data = await fs.readFile(ruta, 'utf-8');
-//     return data ? JSON.parse(data) : [];
-//   } catch (err) {
-//     if (err.code === 'ENOENT') {
-//       console.log(`El archivo ${ruta} no existe. Se creará uno nuevo.`);
-//       return [];
-//     }
-//     throw err;
-//   }
-// }
-
-// async function escribirArchivo(ruta, datos) {
-//   try {
-//     await fs.writeFile(ruta, JSON.stringify(datos, null, 2));
-//   } catch (err) {
-//     console.error(`Error al escribir en el archivo ${ruta}:`, err);
-//     throw err;
-//   }
-// }
-
+function actualizarBajaLogica(numeroRegistro) {
+  try {
+    let piezas =  obtener();
+    const index = piezas.findIndex(p => p.NumeroRegistro == numeroRegistro);
+    if (index !== -1) {
+      piezas[index].BajaLogica = false;
+      guardar(piezas);
+      console.log(`Pieza con número de registro ${numeroRegistro} marcada como eliminada lógicamente.`);
+      return true;
+    } else {
+      console.log(`No se encontró la pieza con número de registro ${numeroRegistro}.`);
+      return false;
+    }
+  } catch (err) {
+    console.error('Error al actualizar baja lógica:', err);
+    return false;
+  }
+}
 
 function guardarPrestamo(data) {
   let str_prestamo = fs.readFileSync('./db/prestamo.txt', 'utf-8');
@@ -144,4 +121,4 @@ function obtenerPrestamo() {
 }
 
 
-module.exports = { guardar, obtener, guardarUsuario, getUsuarios, guardarPrestamo, obtenerPrestamo };
+module.exports = { guardar, obtener, guardarUsuario, getUsuarios, guardarPrestamo, obtenerPrestamo, actualizarBajaLogica };
