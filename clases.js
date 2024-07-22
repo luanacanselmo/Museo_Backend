@@ -38,14 +38,16 @@ class Pieza {
 
 class Prestamo{
 
-   constructor(idPres, eventoPre, obsePre, fechaPre, idPieza){
+   constructor(idPres, numPres ,eventoPre, fechaPre, fechaDev, cant ,obsePre, idPieza){
         this.idPrestamo = idPres;
+        this.numeroPrestamo = numPres 
         this.eventoPrestamo = eventoPre;
-        this.observacionPrestamo = obsePre;
         this.fechaPrestamo = fechaPre;
+        this.fechaDevolucion = fechaDev;
+        this.cantidad = cant;
+        this.observacionPrestamo = obsePre;
         this.idPieza = idPieza; 
         this.class = "Prestamo";
-
    }
 
    static fromJSON(json){
@@ -208,19 +210,4 @@ class Usuario {
         }
     }
 }
-/*
-class Perfil {
-    constructor() {
-        this.cuso = [];
-    }
-
-    addCasoUso(cu) {
-        this.cuso.push(cu);
-    }
-
-    delCasoUso(cu) {
-        this.cuso = this.cuso.filter(x => x !== cu);
-    }
-}*/
-
 module.exports = { Pieza, Prestamo, Taxidermia , EstadiPieza, Piezaestado, Prestamoestado, Usuario};
