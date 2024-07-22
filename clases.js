@@ -57,11 +57,13 @@ class Prestamo{
         let nuevoPrestamo = new Prestamo();
 
         nuevoPrestamo.idPrestamo = json.idPrestamo;
+        nuevoPrestamo.numeroPrestamo = json.numeroPrestamo;
         nuevoPrestamo.eventoPrestamo = json.eventoPrestamo;
-        nuevoPrestamo.observacionPrestamo = json.observacionPrestamo;
         nuevoPrestamo.fechaPrestamo = json.fechaPrestamo;
+        nuevoPrestamo.fechaDevolucion = json.fechaDevolucion;
+        nuevoPrestamo.cantidad = json.cantidad;
+        nuevoPrestamo.observacionPrestamo = json.observacionPrestamo;
         nuevoPrestamo.idPieza = json.idPieza;
-        nuevoPrestamo.class = json.class;
         return nuevoPrestamo;
 
     }

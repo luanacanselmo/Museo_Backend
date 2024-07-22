@@ -107,18 +107,20 @@ function guardarPrestamo(data) {
 
   let miPretamos = new Clases.Prestamo(
       data.idPrestamo,
+      data.numeroPrestamo,
       data.eventoPrestamo,
-      data.observacionPrestamo,
-      data.MaterialObjeto,
       data.fechaPrestamo,
       data.fechaDevolucion,
+      data.cantidad,
+      data.observacionPrestamo,
+      data.idPieza,
       insert
 
   );
 
   console.log(' miPretamos:', miPretamos);
 
-  const guardarExitoso = Modelo.guardar(miPretamos);
+  const guardarExitoso = Modelo.guardarPrestamo(miPretamos);
   console.log('Operación de guardar:', guardarExitoso);
 
   return guardarExitoso;
