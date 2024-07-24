@@ -151,7 +151,7 @@
                 </thead>
                 <tbody>
                     {{#each piezas}}
-                    
+                    {{#if this.BajaLogica}}
                     <tr class="odd:bg-zinc-200 even:bg-[#cdcdcd] border-b">
                         <td class="m-auto px-6 py-3">
                             <label class="relative flex cursor-pointer items-center p-1 rounded-md">
@@ -209,6 +209,7 @@
                             </form>
                         </td>
                     </tr>
+                    {{/if}}
                     {{/each}}
                 </tbody>
             </table>
