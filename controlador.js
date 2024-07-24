@@ -78,9 +78,22 @@ function PiezaPorNro(numRe) {
     console.log('No encontre ni aka');
   }
 
-
 }
 
+//----------------------------------------en proceso---------------------------------
+
+function actualizarPieza(piezaAct,NroRpiezaOri) {
+
+  const piezaOr = PiezaPorNro(NroRpiezaOri);
+  const piezasArray = Modelo.obtener();
+
+  if(piezaAct !== piezaOr ){
+
+    
+
+  }
+
+}
 
 //baja logica
 function PiezaBaja(numRe) {
@@ -131,4 +144,4 @@ function obtenerPrestamo() {
 
 
 
-module.exports = { nuevoUser, nuevo, obtener, listar, PiezaPorNro, guardarPrestamo, obtenerPrestamo, PiezaBaja };
+module.exports = { nuevoUser, nuevo, obtener, listar, PiezaPorNro, guardarPrestamo, obtenerPrestamo, PiezaBaja, actualizarPieza };

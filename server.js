@@ -83,7 +83,7 @@ app.get('/menu',autenticarUsuario, (req, res) => {
 
 app.get('/inicio',autenticarUsuario, (req, res) => {
   console.log(req.usuario)
-  res.render('inicio', { useTailwind: false, titulo: 'Inicio', usuario: req.usuario});
+  res.render('inicio', { useTailwind: true, titulo: 'Inicio', usuario: req.usuario});
 });
 
 app.get('/nuevo',autenticarUsuario, (req, res) => {
@@ -143,10 +143,20 @@ app.get('/editarPieza/:NroReg', (req, res)=>{
 
   const numRe = req.params.NroReg;
   const piezas = Controlador.PiezaPorNro(numRe);
-  res.render('modificar', { useTailwind: false, titulo: 'Modificar', piezas });
+  res.render('modificar', { useTailwind: true, titulo: 'Modificar', piezas });
 
 
 }); 
+
+app.post('/actualizarPieza', (req, res)=>{
+
+  const piezaAct = req.body;
+  const NroRpiezaOri = Controlador.PiezaPorNro(piezaAct.NroReg);
+
+  const piezaActualizada = Controlador.actualizarPieza(piezaAct,NroRpiezaOri);
+
+
+});
 
 
 app.get('/prestamo', autenticarUsuario,(req, res) => {
