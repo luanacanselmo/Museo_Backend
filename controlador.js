@@ -118,7 +118,7 @@ function guardarPrestamo(data) {
 
   console.log(' miPretamos:', miPretamos);
 
-  const guardarExitoso = Modelo.guardar(miPretamos);
+  const guardarExitoso = Modelo.guardarPrestamo(miPretamos);
   console.log('Operación de guardar:', guardarExitoso);
 
   return guardarExitoso;
