@@ -85,6 +85,7 @@ function PiezaPorNro(numRe) {
 //baja logica
 function PiezaBaja(numRe) {
   const numeroRegistro = numRe;
+  console.log('Número de Registro recibido en PiezaBaja:', numeroRegistro); // Agregada
   const resultado = Modelo.actualizarBajaLogica(numeroRegistro);
   if (resultado) {
     return{ success: true, message: 'Pieza eliminada lógicamente' };
@@ -124,11 +125,6 @@ function guardarPrestamo(data) {
 function obtenerPrestamo() {
   return Modelo.obtenerPrestamo();
 }
-
-
-
-
-
 
 
 module.exports = { nuevoUser, nuevo, obtener, listar, PiezaPorNro, guardarPrestamo, obtenerPrestamo, PiezaBaja };

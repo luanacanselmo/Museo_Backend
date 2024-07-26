@@ -178,7 +178,3 @@ app.use((req, res, next) => {
 app.listen(port, () => {
   console.log(`Corriendo en \x1b[35m'http://localhost:${port}'\x1b[30m crtl + click izq para ir\x1b[0m`)
 });
-
-
-//baja logica
-/* app.delete('/eliminar/:numeroRegistro', Controlador.eliminarPieza); */
