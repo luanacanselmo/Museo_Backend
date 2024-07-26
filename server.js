@@ -83,7 +83,7 @@ app.get('/menu',autenticarUsuario, (req, res) => {
 
 app.get('/inicio',autenticarUsuario, (req, res) => {
   console.log(req.usuario)
-  res.render('inicio', { useTailwind: false, titulo: 'Inicio', usuario: req.usuario});
+  res.render('inicio', { useTailwind: true, titulo: 'Inicio', usuario: req.usuario});
 });
 
 app.get('/nuevo',autenticarUsuario, (req, res) => {
@@ -143,11 +143,43 @@ app.get('/editarPieza/:NroReg', (req, res)=>{
 
   const numRe = req.params.NroReg;
   const piezas = Controlador.PiezaPorNro(numRe);
-  res.render('modificar', { useTailwind: false, titulo: 'Modificar', piezas });
+  res.render('modificar', { useTailwind: true, titulo: 'Modificar', piezas });
 
 
 }); 
 
+app.post('/actualizarPieza', (req, res)=>{
+
+  const piezaAct = req.body;
+  const NroRpiezaOri = Controlador.PiezaPorNro(piezaAct.NroReg);
+
+  const piezaActualizada = Controlador.actualizarPieza(piezaAct,NroRpiezaOri);
+
+
+});
+
+
+app.get('/prestamo', autenticarUsuario,(req, res) => {
+  console.log("llegó un /nuevo prestamo");
+  res.render('prestamo', { useTailwind: true, titulo: 'Nuevo prestamo' });
+});
+
+app.post('/registrarprestamo', (req, res) => {
+  console.log("llegó post");
+  console.log(req.body);
+
+  const operacionExitosa = Controlador.guardarPrestamo(req.body);
+  console.log('Operación exitosa:', operacionExitosa);
+});
+
+
+app.post('/deletePieza',(req, res) => {
+  console.log("llegó post");
+  console.log(req.body);
+  const NroReg = req.body.NroReg;
+  const operacionExitosa = Controlador.PiezaBaja(NroReg);
+  res.redirect('menu');
+});
 
 
 
