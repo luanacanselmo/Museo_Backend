@@ -94,7 +94,6 @@ app.get('/nuevo',autenticarUsuario, (req, res) => {
 app.post('/agregar', (req, res) => {
   console.log("llegó post/agregar");
   console.log(req.body);
-
   const operacionExitosa = Controlador.nuevo(req.body);
   console.log('Operación exitosa:', operacionExitosa);
 

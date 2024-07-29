@@ -29,7 +29,7 @@ function tetsUsuario() {
 }
 
 function testGuardar(){
-    const miPieza = new Clases.Pieza(50, "mate", "20x20","plata",new Date(),"compra",1234,"deteriorada",1,"",true)
+    const miPieza = new Clases.Pieza(5050, "libro", "20x20","plata",new Date(),"compra",1234,"deteriorada",1,"",true)
     Modelo.guardar(miPieza)
 }
 //testGuardar();
@@ -37,7 +37,7 @@ function testGuardar(){
 function testActualizarBajaLogica(){
     Modelo.actualizarBajaLogica()
 }
-testActualizarBajaLogica(50)
+testActualizarBajaLogica(1734)
 
 function testObtener(){
     console.log("Test Obtener Piezas----")
